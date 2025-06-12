@@ -1,0 +1,40 @@
+#!/usr/bin/env sh
+
+#
+# Useful sources:
+#
+#   * https://docs.gitlab.com/ee/ci/ssh_keys/
+#
+
+set -e
+
+if [ ! -f "$SSH_PRIVATE_KEY_FILE" ]; then
+  echo "ERROR: SSH_PRIVATE_KEY_FILE environment variable not set" >&2
+  exit 1
+fi
+
+# Set correct private key file permissions and load key into ssh-agent.
+chmod 400 "$SSH_PRIVATE_KEY_FILE"
+ssh-add -q "$SSH_PRIVATE_KEY_FILE"
+
+# Set up local users SSH profile
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+# If a known hosts file is specified as a GitLab CI/CD file variable,
+# copy it into the SSH profile directory.
+if [ -f "$SSH_KNOWN_HOSTS_FILE" ]; then
+  cp "$SSH_KNOWN_HOSTS_FILE" ~/.ssh/known_hosts
+fi
+
+# If a known hosts file exists inside the repository, add it too.
+if [ -f ".ssh/known_hosts" ]; then
+  cat ".ssh/known_hosts" >> ~/.ssh/known_hosts
+fi
+
+chmod 644 ~/.ssh/known_hosts
+
+# Copy SSH client config
+if [ -f ".ssh/config" ]; then
+  cp ".ssh/config" ~/.ssh/config
+fi
