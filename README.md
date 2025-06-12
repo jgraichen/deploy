@@ -43,7 +43,7 @@ ssh-keyscan <target host> > .ssh/known_hosts
 
 ```yaml
 deploy production:
-  image: docker pull ghcr.io/jgraichen/deploy:1
+  image: ghcr.io/jgraichen/deploy:1
 
   # Optional: run deploy jobs only manual or add other rules
   # when to deploy automatically.
