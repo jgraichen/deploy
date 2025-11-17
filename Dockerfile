@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.20
 
-FROM docker:28
+FROM docker:29
 
 SHELL ["/bin/sh", "-o", "pipefail", "-c"]
 
