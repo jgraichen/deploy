@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.28@sha256:bb22d9815c728170f72750f4e5b0d672e06176142e1d602c7e66c050100b7e5b
 
-FROM docker:29@sha256:9e79b879b177fbd72c34376a3dd3d91747da5db49e1f560f76aea59561471977
+FROM docker:29@sha256:08a98015fce594af7c382883bea080ea206de74402a95da9dc52b6428c8cd121
 
 SHELL ["/bin/sh", "-o", "pipefail", "-c"]
 
